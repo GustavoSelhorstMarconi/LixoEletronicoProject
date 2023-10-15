@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LixoEletronico.Application\LixoEletronico.Application.csproj" />
+    <ProjectReference Include="..\LixoEletronico.Domain\LixoEletronico.Domain.csproj" />
+    <ProjectReference Include="..\LixoEletronico.Infra.Data\LixoEletronico.Infra.Data.csproj" />
+  </ItemGroup>
+
 </Project>
