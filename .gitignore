@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+LixoEletronico.API/appsettings.Development.json
+/LixoEletronico.API/appsettings.Development.json
