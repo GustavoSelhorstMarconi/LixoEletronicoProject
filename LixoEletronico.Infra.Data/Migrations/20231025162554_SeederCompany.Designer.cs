@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LixoEletronico.Infra.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20231010142544_SeederAddress")]
-    partial class SeederAddress
+    [Migration("20231025162554_SeederCompany")]
+    partial class SeederCompany
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,11 +26,11 @@ namespace LixoEletronico.Infra.Data.Migrations
 
             modelBuilder.Entity("LixoEletronico.Domain.Entities.Address", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -44,8 +44,8 @@ namespace LixoEletronico.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
+                    b.Property<short>("Number")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("State")
                         .IsRequired()
@@ -62,40 +62,39 @@ namespace LixoEletronico.Infra.Data.Migrations
 
             modelBuilder.Entity("LixoEletronico.Domain.Entities.Company", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<long>("AddressId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("RepresentantId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("RepresentantId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId")
                         .IsUnique();
 
-                    b.HasIndex("RepresentantId")
-                        .IsUnique();
+                    b.HasIndex("RepresentantId");
 
                     b.ToTable("Companies");
                 });
 
             modelBuilder.Entity("LixoEletronico.Domain.Entities.Person", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -115,24 +114,24 @@ namespace LixoEletronico.Infra.Data.Migrations
 
             modelBuilder.Entity("LixoEletronico.Domain.Entities.Review", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("CompanyId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("PersonId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("Rating")
+                    b.Property<int>("CompanyId")
                         .HasColumnType("int");
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("Rating")
+                        .HasColumnType("tinyint");
 
                     b.HasKey("Id");
 
@@ -152,8 +151,8 @@ namespace LixoEletronico.Infra.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("LixoEletronico.Domain.Entities.Person", "Representant")
-                        .WithOne()
-                        .HasForeignKey("LixoEletronico.Domain.Entities.Company", "RepresentantId")
+                        .WithMany("Companies")
+                        .HasForeignKey("RepresentantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -188,6 +187,8 @@ namespace LixoEletronico.Infra.Data.Migrations
 
             modelBuilder.Entity("LixoEletronico.Domain.Entities.Person", b =>
                 {
+                    b.Navigation("Companies");
+
                     b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618

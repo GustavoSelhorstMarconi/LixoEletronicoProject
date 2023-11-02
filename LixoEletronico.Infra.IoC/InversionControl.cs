@@ -1,4 +1,5 @@
 ﻿using LixoEletronico.Application;
+using LixoEletronico.Application.Contracts;
 using LixoEletronico.Domain.Contracts;
 using LixoEletronico.Infra.Data;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,9 @@ namespace LixoEletronico.Infra.IoC
             serviceCollection.AddScoped<IPersonService, PersonService>();
             serviceCollection.AddScoped<IGeneralRepository, GeneralRepository>();
             serviceCollection.AddScoped<IPersonRepository, PersonRepository>();
+
+            serviceCollection.AddScoped<ICompanyService, CompanyService>();
+            serviceCollection.AddScoped<ICompanyRepository, CompanyRepository>();
         }
     }
 }

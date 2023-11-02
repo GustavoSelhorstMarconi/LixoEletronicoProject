@@ -13,18 +13,26 @@ namespace LixoEletronico.Infra.Data
             _context = context;
         }
 
-        public async Task UpdatePerson(long id, Person person)
+        public async Task UpdatePerson(int id, Person person)
         {
-            Person? personToUpdate = await GetPerson(id);
+            Person? personToUpdate = await _context.People
+                .SingleOrDefaultAsync(x => x.Id == id);
 
-            personToUpdate.UpdateEntity(person);
+            if (personToUpdate == null)
+            {
+                throw new ApplicationException("Pessoa não encontrada.");
+            }
+
+            personToUpdate.UpdatePerson(person);
 
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Person> GetPerson(long id)
+        public async Task<Person> GetPerson(int id)
         {
-            Person? person = await _context.People.SingleOrDefaultAsync(x => x.Id == id);
+            Person? person = await _context.People
+                .AsNoTracking()
+                .SingleOrDefaultAsync(x => x.Id == id);
 
             if (person == null)
             {

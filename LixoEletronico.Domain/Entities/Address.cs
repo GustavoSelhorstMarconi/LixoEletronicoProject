@@ -2,7 +2,7 @@
 {
     public class Address
     {
-        public Address(int number, string street, string district, string city, string state, string country) : base()
+        public Address(short number, string street, string district, string city, string state, string country) : base()
         {
             Number = number;
             Street = street;
@@ -16,9 +16,9 @@
         {
         }
 
-        public long Id { get; private set; }
+        public int Id { get; private set; }
 
-        public int Number { get; private set; }
+        public short Number { get; private set; }
 
         public string Street { get; private set; }
 

@@ -10,13 +10,17 @@ namespace LixoEletronico.Infra.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("INSERT INTO Companies (Name, RepresentantId, AddressId)\r\nVALUES\r\n('Lixo mania', 1, 1),\r\n('Agili', 2, 2),\r\n('Til', 3, 3)");
+            migrationBuilder.Sql($@"
+                INSERT INTO Companies(Name, RepresentantId, AddressId)
+                VALUES ('Empresa ruim', 1, 1),
+                ('Empresa pior', 2, 2),
+                ('Empresa pior ainda', 3, 3)");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("DELETE FROM Companies");
+            migrationBuilder.Sql($@"DELETE FROM Companies");
         }
     }
 }

@@ -5,7 +5,7 @@
 namespace LixoEletronico.Infra.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateAddressCompanyReviewPeopleTables : Migration
+    public partial class TablesCreation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,9 +14,9 @@ namespace LixoEletronico.Infra.Data.Migrations
                 name: "Adresses",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Number = table.Column<int>(type: "int", nullable: false),
+                    Number = table.Column<short>(type: "smallint", nullable: false),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     District = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -32,7 +32,7 @@ namespace LixoEletronico.Infra.Data.Migrations
                 name: "People",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "varchar(300)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -47,11 +47,11 @@ namespace LixoEletronico.Infra.Data.Migrations
                 name: "Companies",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RepresentantId = table.Column<long>(type: "bigint", nullable: false),
-                    AddressId = table.Column<long>(type: "bigint", nullable: false)
+                    RepresentantId = table.Column<int>(type: "int", nullable: false),
+                    AddressId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,12 +74,12 @@ namespace LixoEletronico.Infra.Data.Migrations
                 name: "Reviews",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Rating = table.Column<int>(type: "int", nullable: false),
+                    Rating = table.Column<byte>(type: "tinyint", nullable: false),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PersonId = table.Column<long>(type: "bigint", nullable: false),
-                    CompanyId = table.Column<long>(type: "bigint", nullable: false)
+                    PersonId = table.Column<int>(type: "int", nullable: false),
+                    CompanyId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -106,8 +106,7 @@ namespace LixoEletronico.Infra.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Companies_RepresentantId",
                 table: "Companies",
-                column: "RepresentantId",
-                unique: true);
+                column: "RepresentantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_CompanyId",

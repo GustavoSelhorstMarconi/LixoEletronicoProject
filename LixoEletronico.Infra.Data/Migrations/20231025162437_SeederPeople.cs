@@ -10,13 +10,18 @@ namespace LixoEletronico.Infra.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("INSERT INTO People (Name, Email, IsRepresentant)\r\nVALUES\r\n('Teste 1', 'teste@teste1.com', 0),\r\n('Rogerinho', 'teste@teste2.com', 1),\r\n('Brasileiro', 'teste@teste3.com', 0),\r\n('Otangurango', 'teste@teste4.com', 0),\r\n('Douglas', 'teste@teste5.com', 1)\r\n");
+            migrationBuilder.Sql($@"INSERT INTO People (Name, Email, IsRepresentant)
+                VALUES ('Teste 1', 'testando1@email.com', 0),
+                ('Teste 2', 'testando2@email.com', 0),
+                ('Teste 3', 'testando3@email.com', 1),
+                ('Teste 4', 'testando4@email.com', 1),
+                ('Teste 5', 'testando5@email.com', 1)");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("DELETE FROM People");
+            migrationBuilder.Sql($@"DELETE FROM People");
         }
     }
 }

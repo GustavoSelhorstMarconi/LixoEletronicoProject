@@ -1,4 +1,5 @@
-﻿using LixoEletronico.Domain.Contracts;
+﻿using LixoEletronico.Application.Contracts;
+using LixoEletronico.Domain.Contracts;
 using LixoEletronico.Domain.Entities;
 
 namespace LixoEletronico.Application
@@ -19,17 +20,17 @@ namespace LixoEletronico.Application
             await _repository.Add(person);
         }
 
-        public Task UpdatePerson(long id, Person person)
+        public async Task UpdatePerson(int id, Person person)
         {
-            return _personRepository.UpdatePerson(id, person);
+            await _personRepository.UpdatePerson(id, person);
         }
 
-        public Task<Person> GetPerson(long id)
+        public async Task<Person> GetPerson(int id)
         {
-            return _personRepository.GetPerson(id);
+            return await _personRepository.GetPerson(id);
         }
 
-        public async Task DeletePerson(long id)
+        public async Task DeletePerson(int id)
         {
             Person person = await _personRepository.GetPerson(id);
 

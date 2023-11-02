@@ -1,4 +1,4 @@
-using LixoEletronico.Application;
+using LixoEletronico.Application.Contracts;
 using LixoEletronico.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,8 +25,8 @@ namespace LixoEletronico.API.Controllers
             return NoContent();
         }
 
-        [HttpPatch(Name = "UpdatePerson")]
-        public async Task<ActionResult> Update(long id, Person person)
+        [HttpPut(Name = "UpdatePerson")]
+        public async Task<ActionResult> Update(int id, Person person)
         {
             await _personService.UpdatePerson(id, person);
 
@@ -34,7 +34,7 @@ namespace LixoEletronico.API.Controllers
         }
 
         [HttpGet(Name = "GetPerson")]
-        public async Task<ActionResult> Get(long id)
+        public async Task<ActionResult> Get(int id)
         {
             Person person = await _personService.GetPerson(id);
 
@@ -42,7 +42,7 @@ namespace LixoEletronico.API.Controllers
         }
 
         [HttpDelete(Name = "DeletePerson")]
-        public async Task<ActionResult> Delete(long id)
+        public async Task<ActionResult> Delete(int id)
         {
             await _personService.DeletePerson(id);
 

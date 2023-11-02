@@ -11,10 +11,11 @@
 
         protected Person()
         {
+            Companies = new List<Company>();
             Reviews = new List<Review>();
         }
 
-        public long Id { get; private set; }
+        public int Id { get; private set; }
 
         public string Name { get; private set; }
 
@@ -22,13 +23,15 @@
 
         public bool IsRepresentant { get; private set; }
 
-        public List<Review>? Reviews { get; set; }
+        public List<Company>? Companies { get; private set; }
 
-        public void UpdateEntity(Person person)
+        public List<Review>? Reviews { get; private set; }
+
+        public void UpdatePerson(Person person)
         {
-            this.Name = person.Name;
-            this.Email = person.Email;
-            this.IsRepresentant = person.IsRepresentant;
+            Name = person.Name;
+            Email = person.Email;
+            IsRepresentant = person.IsRepresentant;
         }
     }
 }

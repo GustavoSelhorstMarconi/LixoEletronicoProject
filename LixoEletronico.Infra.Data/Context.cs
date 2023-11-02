@@ -28,13 +28,13 @@ namespace LixoEletronico.Infra.Data
                 .HasMany(x => x.Reviews)
                 .WithOne(x => x.Person)
                 .HasForeignKey(x => x.PersonId)
-                .IsRequired(true);
+                .IsRequired();
 
-            modelBuilder.Entity<Company>()
-                .HasOne(x => x.Representant)
-                .WithOne()
-                .HasForeignKey<Company>(x => x.RepresentantId)
-                .IsRequired(true);
+            modelBuilder.Entity<Person>()
+                .HasMany(x => x.Companies)
+                .WithOne(x => x.Representant)
+                .HasForeignKey(x => x.RepresentantId)
+                .IsRequired();
 
             modelBuilder.Entity<Company>()
                 .HasOne(x => x.Address)
