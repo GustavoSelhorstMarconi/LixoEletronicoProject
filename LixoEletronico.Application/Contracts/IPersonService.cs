@@ -1,14 +1,15 @@
-﻿using LixoEletronico.Domain.Entities;
+﻿using LixoEletronico.Application.Dtos;
+using LixoEletronico.Domain.Entities;
 
 namespace LixoEletronico.Application.Contracts
 {
     public interface IPersonService
     {
-        Task AddPerson(Person person);
+        Task AddPerson(PersonDto person);
 
-        Task UpdatePerson(int id, Person person);
+        Task UpdatePerson(int id, PersonDto person);
 
-        Task<Person> GetPerson(int id);
+        Task<PersonDto> GetPerson(int id);
 
         Task DeletePerson(int id);
     }

@@ -1,14 +1,15 @@
-﻿using LixoEletronico.Domain.Entities;
+﻿using LixoEletronico.Application.Dtos;
+using LixoEletronico.Domain.Entities;
 
 namespace LixoEletronico.Application.Contracts
 {
     public interface ICompanyService
     {
-        Task AddCompany(Company company);
+        Task AddCompany(CompanyDto companyDto);
 
-        Task UpdateCompany(int id, Company company);
+        Task UpdateCompany(int id, CompanyDto companyDto);
 
-        Task<Company> GetCompany(int id);
+        Task<CompanyDto> GetCompany(int id);
 
         Task DeleteCompany(int id);
     }

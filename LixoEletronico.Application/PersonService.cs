@@ -1,4 +1,6 @@
-﻿using LixoEletronico.Application.Contracts;
+﻿using AutoMapper;
+using LixoEletronico.Application.Contracts;
+using LixoEletronico.Application.Dtos;
 using LixoEletronico.Domain.Contracts;
 using LixoEletronico.Domain.Entities;
 
@@ -8,26 +10,36 @@ namespace LixoEletronico.Application
     {
         private readonly IGeneralRepository _repository;
         private readonly IPersonRepository _personRepository;
+        private readonly IMapper _mapper;
 
-        public PersonService(IGeneralRepository repository, IPersonRepository personRepository)
+        public PersonService(IGeneralRepository repository, IPersonRepository personRepository, IMapper mapper)
         {
             _repository = repository;
             _personRepository = personRepository;
+            _mapper = mapper;
         }
 
-        public async Task AddPerson(Person person)
+        public async Task AddPerson(PersonDto personDto)
         {
+            var person = _mapper.Map<Person>(personDto);
+
             await _repository.Add(person);
         }
-
-        public async Task UpdatePerson(int id, Person person)
+        
+        public async Task UpdatePerson(int id, PersonDto personDto)
         {
+            var person = _mapper.Map<Person>(personDto);
+
             await _personRepository.UpdatePerson(id, person);
         }
 
-        public async Task<Person> GetPerson(int id)
+        public async Task<PersonDto> GetPerson(int id)
         {
-            return await _personRepository.GetPerson(id);
+            var person = await _personRepository.GetPerson(id);
+
+            var result = _mapper.Map<PersonDto>(person);
+
+            return result;
         }
 
         public async Task DeletePerson(int id)

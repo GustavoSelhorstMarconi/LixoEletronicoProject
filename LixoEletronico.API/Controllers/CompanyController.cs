@@ -1,6 +1,5 @@
-﻿using LixoEletronico.Application;
-using LixoEletronico.Application.Contracts;
-using LixoEletronico.Domain.Entities;
+﻿using LixoEletronico.Application.Contracts;
+using LixoEletronico.Application.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LixoEletronico.API.Controllers
@@ -17,7 +16,7 @@ namespace LixoEletronico.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(Company company)
+        public async Task<ActionResult> Add(CompanyDto company)
         {
             await _companyService.AddCompany(company);
 
@@ -25,7 +24,7 @@ namespace LixoEletronico.API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> Update(int id, Company company)
+        public async Task<ActionResult> Update(int id, CompanyDto company)
         {
             await _companyService.UpdateCompany(id, company);
 
@@ -35,7 +34,7 @@ namespace LixoEletronico.API.Controllers
         [HttpGet]
         public async Task<ActionResult> Get(int id)
         {
-            Company company = await _companyService.GetCompany(id);
+            CompanyDto company = await _companyService.GetCompany(id);
 
             return Ok(company);
         }
