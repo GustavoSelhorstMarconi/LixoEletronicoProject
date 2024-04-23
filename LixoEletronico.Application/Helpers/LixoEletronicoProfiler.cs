@@ -8,8 +8,10 @@ namespace LixoEletronico.Application.Helpers
     {
         public LixoEletronicoProfiler()
         {
-            CreateMap<Person, PersonDto>().ReverseMap();
+            CreateMap<Address, AddressDto>().ReverseMap();
             CreateMap<Company, CompanyDto>().ReverseMap();
+            CreateMap<Person, PersonDto>().ReverseMap();
+            CreateMap<Review, ReviewDto>().ReverseMap();
         }
     }
 }

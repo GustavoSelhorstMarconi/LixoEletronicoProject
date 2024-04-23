@@ -7,5 +7,7 @@ namespace LixoEletronico.Domain.Contracts
         Task UpdateCompany(int id, Company company);
 
         Task<Company> GetCompany(int id);
+
+        Task<List<Company>> GetAllCompanies();
     }
 }

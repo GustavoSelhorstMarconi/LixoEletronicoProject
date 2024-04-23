@@ -1,5 +1,4 @@
 ﻿using LixoEletronico.Application.Dtos;
-using LixoEletronico.Domain.Entities;
 
 namespace LixoEletronico.Application.Contracts
 {
@@ -10,6 +9,8 @@ namespace LixoEletronico.Application.Contracts
         Task UpdateCompany(int id, CompanyDto companyDto);
 
         Task<CompanyDto> GetCompany(int id);
+
+        Task<List<CompanyDto>> GetAllCompanies();
 
         Task DeleteCompany(int id);
     }

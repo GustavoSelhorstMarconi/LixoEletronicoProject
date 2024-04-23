@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LixoEletronico.API.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class CompanyController : ControllerBase
     {
         private readonly ICompanyService _companyService;
@@ -31,12 +31,20 @@ namespace LixoEletronico.API.Controllers
             return NoContent();
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
             CompanyDto company = await _companyService.GetCompany(id);
 
             return Ok(company);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetAll()
+        {
+            List<CompanyDto> companies = await _companyService.GetAllCompanies();
+
+            return Ok(companies);
         }
 
         [HttpDelete]

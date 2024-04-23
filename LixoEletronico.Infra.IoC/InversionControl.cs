@@ -22,6 +22,9 @@ namespace LixoEletronico.Infra.IoC
 
             serviceCollection.AddScoped<ICompanyService, CompanyService>();
             serviceCollection.AddScoped<ICompanyRepository, CompanyRepository>();
+
+            serviceCollection.AddScoped<IReviewService, ReviewService>();
+            serviceCollection.AddScoped<IReviewRepository, ReviewRepository>();
         }
     }
 }

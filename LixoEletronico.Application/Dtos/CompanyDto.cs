@@ -11,5 +11,9 @@
         public PersonDto? Representant { get; set; }
 
         public int AddressId { get; set; }
+
+        public AddressDto Address { get; set; }
+
+        public float ReviewAverage { get; set; }
     }
 }

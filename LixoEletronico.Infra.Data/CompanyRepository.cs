@@ -1,6 +1,7 @@
 ﻿using LixoEletronico.Domain.Contracts;
 using LixoEletronico.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace LixoEletronico.Infra.Data
 {
@@ -32,6 +33,9 @@ namespace LixoEletronico.Infra.Data
         {
             Company? company = await _context.Companies
                 .AsNoTracking()
+                .Include(x => x.Representant)
+                .Include(x => x.Address)
+                .Include(x => x.Reviews)
                 .SingleOrDefaultAsync(x => x.Id == id);
 
             if (company == null)
@@ -40,6 +44,22 @@ namespace LixoEletronico.Infra.Data
             }
 
             return company;
+        }
+
+        public async Task<List<Company>> GetAllCompanies()
+        {
+            List<Company>? companies = await _context.Companies
+                .Include(x => x.Representant)
+                .Include(x => x.Address)
+                .AsNoTracking()
+                .ToListAsync();
+
+            if (companies == null)
+            {
+                throw new ApplicationException("Companias não encontradas.");
+            }
+
+            return companies;
         }
     }
 }

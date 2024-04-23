@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LixoEletronico.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PersonController : ControllerBase
     {
         private readonly ILogger<PersonController> _logger;
