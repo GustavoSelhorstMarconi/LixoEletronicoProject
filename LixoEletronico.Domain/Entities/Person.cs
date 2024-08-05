@@ -1,11 +1,12 @@
-﻿namespace LixoEletronico.Domain.Entities
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace LixoEletronico.Domain.Entities
 {
-    public class Person
+    public class Person : IdentityUser<int>
     {
-        public Person(string name, bool isRepresentant, string email) : base()
+        public Person(string name, bool isRepresentant) : base()
         {
             Name = name;
-            Email = email;
             IsRepresentant = isRepresentant;
         }
 
@@ -15,13 +16,13 @@
             Reviews = new List<Review>();
         }
 
-        public int Id { get; private set; }
-
         public string Name { get; private set; }
 
-        public string Email { get; private set; }
-
         public bool IsRepresentant { get; private set; }
+
+        public string? RefreshToken { get; set; }
+
+        public DateTime RefreshTokenExpiryTime { get; set; }
 
         public List<Company>? Companies { get; private set; }
 

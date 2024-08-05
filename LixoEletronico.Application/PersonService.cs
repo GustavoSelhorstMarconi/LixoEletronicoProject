@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using LixoEletronico.Application.Contracts;
-using LixoEletronico.Application.Dtos;
+using LixoEletronico.Shared.Dtos;
 using LixoEletronico.Domain.Contracts;
 using LixoEletronico.Domain.Entities;
 

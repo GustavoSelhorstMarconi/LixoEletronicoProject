@@ -1,6 +1,8 @@
 using LixoEletronico.Application.Contracts;
-using LixoEletronico.Application.Dtos;
+using LixoEletronico.Domain.Entities;
+using LixoEletronico.Shared.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace LixoEletronico.API.Controllers
 {
@@ -10,11 +12,13 @@ namespace LixoEletronico.API.Controllers
     {
         private readonly ILogger<PersonController> _logger;
         private readonly IPersonService _personService;
+        private readonly IHttpContextAccessor _contextAccessor;
 
-        public PersonController(ILogger<PersonController> logger, IPersonService personService)
+        public PersonController(ILogger<PersonController> logger, IPersonService personService, IHttpContextAccessor contextAccessor)
         {
             _logger = logger;
             _personService = personService;
+            _contextAccessor = contextAccessor;
         }
 
         [HttpPost]
@@ -25,18 +29,20 @@ namespace LixoEletronico.API.Controllers
             return NoContent();
         }
 
-        [HttpPut]
-        public async Task<ActionResult> Update(int id, PersonDto person)
+        [Route("info")]
+        [HttpPost]
+        public async Task<ActionResult> Get()
         {
-            await _personService.UpdatePerson(id, person);
+            var user = _contextAccessor?.HttpContext?.User;
+            int? id = int.Parse(user?.FindFirst(ClaimTypes.Sid)?.Value);
 
-            return NoContent();
-        }
+            if (id == null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new ResponseDto { Status = "Error", Message = "Usuário não encontrado!" });
+            }
 
-        [HttpGet]
-        public async Task<ActionResult> Get(int id)
-        {
-            PersonDto person = await _personService.GetPerson(id);
+            PersonDto person = await _personService.GetPerson(id.Value);
 
             return Ok(person);
         }

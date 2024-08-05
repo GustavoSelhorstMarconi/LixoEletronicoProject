@@ -5,22 +5,24 @@
 namespace LixoEletronico.Infra.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class SeederCompany : Migration
+    public partial class AdicionadoColunaImagem : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql($@"
-                INSERT INTO Companies(Name, RepresentantId, AddressId)
-                VALUES ('Empresa ruim', 1, 1),
-                ('Empresa pior', 2, 2),
-                ('Empresa pior ainda', 3, 3)");
+            migrationBuilder.AddColumn<byte[]>(
+                name: "Logo",
+                table: "Companies",
+                type: "varbinary(max)",
+                nullable: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql($@"DELETE FROM Companies");
+            migrationBuilder.DropColumn(
+                name: "Logo",
+                table: "Companies");
         }
     }
 }

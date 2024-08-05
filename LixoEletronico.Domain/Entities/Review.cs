@@ -22,7 +22,7 @@
 
         public int PersonId { get; private set; }
 
-        public Person Person { get; private set; }
+        public Person Person { get; set; }
 
         public int CompanyId { get; private set; }
 

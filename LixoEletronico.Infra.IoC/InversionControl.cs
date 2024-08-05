@@ -13,7 +13,7 @@ namespace LixoEletronico.Infra.IoC
         public static void AddInfraestructure(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
             serviceCollection.AddDbContext<Context>(
-                context => context.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+                context => context.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), x => x.UseNetTopologySuite())
             );
 
             serviceCollection.AddScoped<IPersonService, PersonService>();
@@ -25,6 +25,8 @@ namespace LixoEletronico.Infra.IoC
 
             serviceCollection.AddScoped<IReviewService, ReviewService>();
             serviceCollection.AddScoped<IReviewRepository, ReviewRepository>();
+
+            serviceCollection.AddScoped<ITokenService, TokenService>();
         }
     }
 }

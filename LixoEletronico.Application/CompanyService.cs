@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using LixoEletronico.Application.Contracts;
-using LixoEletronico.Application.Dtos;
+using LixoEletronico.Shared.Dtos;
 using LixoEletronico.Domain.Contracts;
 using LixoEletronico.Domain.Entities;
+using NetTopologySuite.Geometries;
 
 namespace LixoEletronico.Application
 {
@@ -12,6 +13,7 @@ namespace LixoEletronico.Application
         private readonly ICompanyRepository _companyRepository;
         private readonly IReviewRepository _reviewRepository;
         private readonly IMapper _mapper;
+        private const double _earthRadius = 6.371;
 
         public CompanyService(IGeneralRepository generalRepository, ICompanyRepository companyRepository, IReviewRepository reviewRepository, IMapper mapper)
         {
@@ -24,6 +26,10 @@ namespace LixoEletronico.Application
         public async Task AddCompany(CompanyDto companyDto)
         {
             var company = _mapper.Map<Company>(companyDto);
+            company.Address.Location = new Point(companyDto.Address.Longitude, companyDto.Address.Latitude)
+            {
+                SRID = 4326
+            };
 
             await _generalRepository.Add(company);
         }
@@ -44,17 +50,18 @@ namespace LixoEletronico.Application
                 0 :
                 company.Reviews.Sum(x => x.Rating) / company.Reviews.Count;
 
+            companyDto.LogoRetorno = companyDto.Logo != null ? Convert.ToBase64String(companyDto.Logo) : string.Empty;
+
             return companyDto;
         }
 
-        public async Task<List<CompanyDto>> GetAllCompanies()
+        public async Task<List<CompanyDto>> GetAllCompanies(FilterCompanySearchDto filter)
         {
-            var companies = await _companyRepository.GetAllCompanies();
-            var reviews = await _reviewRepository.GetReviewsByCompanyId(companies.Select(x => x.Id).ToList());
+            var companies = await _companyRepository.GetAllCompanies(filter);
+            var reviews = await _reviewRepository.GetReviewsByCompaniesIds(companies.Select(x => x.Id).ToList());
 
-            var companiesDto = _mapper.Map<List<CompanyDto>>(companies);
-
-            companiesDto.All(x => {
+            companies.All(x =>
+            {
                 var companyReviews = reviews.Where(y => y.CompanyId == x.Id).ToList();
 
                 x.ReviewAverage = !companyReviews.Any() ? 0 : companyReviews.Sum(x => x.Rating) / companyReviews.Count;
@@ -62,8 +69,9 @@ namespace LixoEletronico.Application
                 return true;
             });
 
-            return companiesDto;
+            return companies;
         }
+
 
         public async Task DeleteCompany(int id)
         {

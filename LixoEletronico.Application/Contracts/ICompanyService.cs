@@ -1,4 +1,4 @@
-﻿using LixoEletronico.Application.Dtos;
+﻿using LixoEletronico.Shared.Dtos;
 
 namespace LixoEletronico.Application.Contracts
 {
@@ -10,7 +10,7 @@ namespace LixoEletronico.Application.Contracts
 
         Task<CompanyDto> GetCompany(int id);
 
-        Task<List<CompanyDto>> GetAllCompanies();
+        Task<List<CompanyDto>> GetAllCompanies(FilterCompanySearchDto filter);
 
         Task DeleteCompany(int id);
     }

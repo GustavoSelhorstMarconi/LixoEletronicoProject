@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace LixoEletronico.Application.Dtos
+namespace LixoEletronico.Shared.Dtos
 {
     public class PersonDto
     {
@@ -13,5 +13,7 @@ namespace LixoEletronico.Application.Dtos
         public string? Email { get; set; }
 
         public bool IsRepresentant { get; set; }
+
+        public string Password { get; set; } = string.Empty;
     }
 }

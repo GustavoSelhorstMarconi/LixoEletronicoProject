@@ -1,4 +1,6 @@
-﻿namespace LixoEletronico.Domain.Entities
+﻿using NetTopologySuite.Geometries;
+
+namespace LixoEletronico.Domain.Entities
 {
     public class Address
     {
@@ -29,5 +31,7 @@
         public string State { get; private set; }
 
         public string Country { get; private set; }
+
+        public Point Location { get; set; }
     }
 }

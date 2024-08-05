@@ -1,9 +1,11 @@
 ﻿using LixoEletronico.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LixoEletronico.Infra.Data
 {
-    public class Context : DbContext
+    public class Context : IdentityDbContext<Person, IdentityRole<int>, int>
     {
         public Context(DbContextOptions<Context> dbContextOptions) : base(dbContextOptions)
         {
@@ -25,12 +27,6 @@ namespace LixoEletronico.Infra.Data
                 .Property(x => x.Name).HasColumnType("varchar(300)");
 
             modelBuilder.Entity<Person>()
-                .HasMany(x => x.Reviews)
-                .WithOne(x => x.Person)
-                .HasForeignKey(x => x.PersonId)
-                .IsRequired();
-
-            modelBuilder.Entity<Person>()
                 .HasMany(x => x.Companies)
                 .WithOne(x => x.Representant)
                 .HasForeignKey(x => x.RepresentantId)
@@ -46,6 +42,13 @@ namespace LixoEletronico.Infra.Data
                 .HasOne(x => x.Company)
                 .WithMany(x => x.Reviews)
                 .HasForeignKey(x => x.CompanyId)
+                .IsRequired(true)
+                .OnDelete(DeleteBehavior.ClientCascade);
+
+            modelBuilder.Entity<Review>()
+                .HasOne(x => x.Person)
+                .WithMany(x => x.Reviews)
+                .HasForeignKey(x => x.PersonId)
                 .IsRequired(true)
                 .OnDelete(DeleteBehavior.ClientCascade);
         }

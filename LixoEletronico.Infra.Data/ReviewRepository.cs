@@ -13,10 +13,20 @@ namespace LixoEletronico.Infra.Data
             _context = context;
         }
 
-        public async Task<List<Review>> GetReviewsByCompanyId(List<int> idsCompanies)
+        public async Task<List<Review>> GetReviewsByCompaniesIds(List<int> idsCompanies)
         {
             List<Review> reviews = await _context.Reviews
                 .Where(x => idsCompanies.Contains(x.CompanyId))
+                .ToListAsync();
+
+            return reviews;
+        }
+
+        public async Task<IEnumerable<Review>> GetReviewsByCompany(int companyId)
+        {
+            List<Review>? reviews = await _context.Reviews
+                .Include(x => x.Person)
+                .Where(x => x.CompanyId == companyId)
                 .ToListAsync();
 
             return reviews;

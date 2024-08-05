@@ -1,6 +1,9 @@
 ﻿using LixoEletronico.Application.Contracts;
-using LixoEletronico.Application.Dtos;
+using LixoEletronico.Domain.Entities;
+using LixoEletronico.Shared.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace LixoEletronico.API.Controllers
 {
@@ -9,15 +12,21 @@ namespace LixoEletronico.API.Controllers
     public class CompanyController : ControllerBase
     {
         private readonly ICompanyService _companyService;
+        private readonly IHttpContextAccessor _contextAccessor;
 
-        public CompanyController(ICompanyService companyService)
+        public CompanyController(ICompanyService companyService, IHttpContextAccessor contextAccessor)
         {
             _companyService = companyService;
+            _contextAccessor = contextAccessor;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> Add(CompanyDto company)
         {
+            var user = _contextAccessor?.HttpContext?.User;
+            company.RepresentantId = int.Parse(user?.FindFirst(ClaimTypes.Sid)?.Value);
+
             await _companyService.AddCompany(company);
 
             return NoContent();
@@ -39,10 +48,10 @@ namespace LixoEletronico.API.Controllers
             return Ok(company);
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetAll()
+        [HttpPost("GetAll")]
+        public async Task<ActionResult> GetAll(FilterCompanySearchDto filter)
         {
-            List<CompanyDto> companies = await _companyService.GetAllCompanies();
+            List<CompanyDto> companies = await _companyService.GetAllCompanies(filter);
 
             return Ok(companies);
         }

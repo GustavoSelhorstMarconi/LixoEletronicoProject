@@ -1,4 +1,5 @@
 ﻿using LixoEletronico.Domain.Entities;
+using LixoEletronico.Shared.Dtos;
 
 namespace LixoEletronico.Domain.Contracts
 {
@@ -8,6 +9,6 @@ namespace LixoEletronico.Domain.Contracts
 
         Task<Company> GetCompany(int id);
 
-        Task<List<Company>> GetAllCompanies();
+        Task<List<CompanyDto>> GetAllCompanies(FilterCompanySearchDto filter);
     }
 }

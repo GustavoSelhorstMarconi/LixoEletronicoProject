@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LixoEletronico.API", "LixoEletronico.API\LixoEletronico.API.csproj", "{D49286B3-144C-4198-BBBD-A946288E78C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LixoEletronico.API", "LixoEletronico.API\LixoEletronico.API.csproj", "{D49286B3-144C-4198-BBBD-A946288E78C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LixoEletronico.Application", "LixoEletronico.Application\LixoEletronico.Application.csproj", "{257EF314-8346-481D-BBE6-A7A4E1E3EA13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LixoEletronico.Application", "LixoEletronico.Application\LixoEletronico.Application.csproj", "{257EF314-8346-481D-BBE6-A7A4E1E3EA13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LixoEletronico.Domain", "LixoEletronico.Domain\LixoEletronico.Domain.csproj", "{087A17E9-E53F-4CAF-AAE3-C37F0B43D630}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LixoEletronico.Domain", "LixoEletronico.Domain\LixoEletronico.Domain.csproj", "{087A17E9-E53F-4CAF-AAE3-C37F0B43D630}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LixoEletronico.Infra.Data", "LixoEletronico.Infra.Data\LixoEletronico.Infra.Data.csproj", "{96FE3BF9-CA81-432A-8DDE-73A1A8099672}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LixoEletronico.Infra.Data", "LixoEletronico.Infra.Data\LixoEletronico.Infra.Data.csproj", "{96FE3BF9-CA81-432A-8DDE-73A1A8099672}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LixoEletronico.Infra.IoC", "LixoEletronico.Infra.IoC\LixoEletronico.Infra.IoC.csproj", "{3E7C10AE-BEEA-45DE-90CA-28A6EDF1F9B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LixoEletronico.Infra.IoC", "LixoEletronico.Infra.IoC\LixoEletronico.Infra.IoC.csproj", "{3E7C10AE-BEEA-45DE-90CA-28A6EDF1F9B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LixoEletronico.Shared", "LixoEletronico.Shared\LixoEletronico.Shared.csproj", "{248D4D20-BBCE-4085-BE38-6470486F0880}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{3E7C10AE-BEEA-45DE-90CA-28A6EDF1F9B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E7C10AE-BEEA-45DE-90CA-28A6EDF1F9B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E7C10AE-BEEA-45DE-90CA-28A6EDF1F9B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{248D4D20-BBCE-4085-BE38-6470486F0880}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{248D4D20-BBCE-4085-BE38-6470486F0880}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{248D4D20-BBCE-4085-BE38-6470486F0880}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{248D4D20-BBCE-4085-BE38-6470486F0880}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

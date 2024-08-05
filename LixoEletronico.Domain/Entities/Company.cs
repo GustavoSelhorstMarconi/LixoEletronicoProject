@@ -2,12 +2,13 @@
 {
     public class Company
     {
-        public Company(string name, int representantId, int addressId, Address address) : base()
+        public Company(string name, int representantId, int addressId, Address address, byte[]? logo) : base()
         {
             Name = name;
             RepresentantId = representantId;
             AddressId = addressId;
             Address = address;
+            Logo = logo;
         }
 
         protected Company()
@@ -26,6 +27,8 @@
         public int AddressId { get; private set; }
 
         public Address? Address { get; private set; }
+
+        public byte[]? Logo { get; set; }
 
         public List<Review>? Reviews { get; set; }
 

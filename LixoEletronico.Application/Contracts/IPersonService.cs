@@ -1,5 +1,4 @@
-﻿using LixoEletronico.Application.Dtos;
-using LixoEletronico.Domain.Entities;
+﻿using LixoEletronico.Shared.Dtos;
 
 namespace LixoEletronico.Application.Contracts
 {

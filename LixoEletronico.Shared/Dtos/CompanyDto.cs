@@ -1,4 +1,4 @@
-﻿namespace LixoEletronico.Application.Dtos
+﻿namespace LixoEletronico.Shared.Dtos
 {
     public class CompanyDto
     {
@@ -15,5 +15,17 @@
         public AddressDto Address { get; set; }
 
         public float ReviewAverage { get; set; }
+
+        public double Distance { get; set; }
+
+        public double LatitudeBase { get; set; }
+
+        public double LongitudeBase { get; set; }
+
+        public byte[]? Logo { get; set; }
+
+        public string? LogoRetorno { get; set; }
+
+        public List<ReviewDto>? Reviews { get; set; }
     }
 }
